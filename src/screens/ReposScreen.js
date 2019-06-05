@@ -32,12 +32,14 @@ class ReposScreen extends PureComponent {
   }
 
   closeModal = () => (this.setState({isVisibleModal: false}))
+
   aplicar = (filtros) =>{
     this.props.dispatch(aplicarFiltro(filtros))
     this.closeModal()
   }
+
   render() {
-    const { repos, filtros } = this.props
+    const { repos, filtros,usuarios } = this.props
 
     return (
       <View style={styles.container}>
@@ -56,7 +58,7 @@ class ReposScreen extends PureComponent {
 
           <FoldList
             nome="Usuários"
-            data={repos}
+            data={usuarios}
             Item={UserItem}
           />
         </ScrollView>
@@ -82,7 +84,6 @@ const mapStateToProps = state => {
   const filtros = filtrosToStateSelectos(state);
   const repos = repoFilterSelector(state);
   const { usuarios } = state.usuariosReducer;
-  console.log(nome);
   return { nome, repos, usuarios ,filtros}
 }
 export default connect(mapStateToProps)(ReposScreen);

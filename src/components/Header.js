@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { Icon } from "react-native-elements";
 
 export default class Header extends PureComponent {
@@ -12,25 +12,27 @@ export default class Header extends PureComponent {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableOpacity 
-                onPress = {this.props.onPressFilter}>
+                <TouchableOpacity
+                    onPress={this.props.onPressFilter}>
                     <Icon
                         name="filter"
                         type="antdesign"
-                        size = {20}
+                        size={20}
                     />
                 </TouchableOpacity>
                 <TextInput
-                    style={{ flex: 8, marginLeft: 10, }}
-                    placeholder="Nome usuário"
+                    style={ styles.TextInputPesquisar}
+                    placeholder="pesquisar..."
                     onChangeText={this.props.onChangeText} />
                 <TouchableOpacity
                     onPress={this.props.onPressBusca}
                 >
-                    <Text>buscar</Text>
+                    <Icon
+                        name="search"
+                        type="octicon"
+                    />
                 </TouchableOpacity>
             </View>
-
         );
     }
 }
@@ -39,6 +41,14 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
+    },
+    TextInputPesquisar:{
+        flex: 8,
+        marginTop: 10, 
+        marginHorizontal: 20, 
+        borderRadius: 20, 
+        backgroundColor: "#D8D8D8",
+        padding: 10,
     }
 });

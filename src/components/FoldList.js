@@ -22,7 +22,6 @@ export default class FoldList extends PureComponent {
     }
     render() {
         const { folded } = this.state;
-        const foldedStyle = folded ? { width: 0, heigth: 0 } : {}
         const { nome } = this.props;
         return (
             <View style={{ minHeight: 50, }}>

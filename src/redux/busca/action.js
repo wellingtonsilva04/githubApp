@@ -12,8 +12,8 @@ export const setNome = (nome) => ({
 export const setFiltros = (filtros) => ({
   type: SET_FILTROS,
   payload: filtros
-})
-  ;
+});
+
 export function buscar() {
   return function fetching(dispatch, getState) {
     dispatch(getUsuarios())
@@ -40,10 +40,8 @@ indiceToTypeSelected = (selectedIndex) => {
   return { orderStart, orderFork, orderIssue }
 }
 
-
 export function aplicarFiltro(filtros) {
-  return function fetching(dispatch, getState) {
-    console.log("d", filtros)
+  return function fetching(dispatch) {
     let { selectedIndex, numStar, numFork, numIssue } = filtros;
     numStar = verifacarTextoVazio(numStar);
     numFork = verifacarTextoVazio(numFork);
