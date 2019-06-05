@@ -1,26 +1,28 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
+
+import React, { Component } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Provider } from "react-redux";
+import store from "./src/redux/createStore";
+import Repo from "./src/screens/repo";
+import ReposScreen from "./src/screens/ReposScreen";
+
 
 export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to githubApp!</Text>
-      </View>
+      <Provider store = {store}>
+          <ReposScreen />
+
+      </Provider>
+
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
