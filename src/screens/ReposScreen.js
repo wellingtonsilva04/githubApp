@@ -5,13 +5,17 @@ import Header from "../components/Header"
 import FoldList from '../components/FoldList';
 import RepoItem from "../components/RepoItem";
 import UserItem from "../components/UserItem";
-import { setNome, buscar } from '../redux/busca/action';
+import { setNome, buscar, aplicarFiltro } from '../redux/busca/action';
+import ModalFiltros from '../components/ModalFiltros';
+import { repoFilterSelector } from '../redux/repos/selectors';
+import { filtrosToStateSelectos } from '../redux/busca/selectors';
 
 
 class ReposScreen extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      isVisibleModal: false,
     };
   }
 
@@ -23,13 +27,18 @@ class ReposScreen extends PureComponent {
     this.props.dispatch(buscar());
 
   }
-
-  _onPressFilter = () => {
-
+  _onPressFilter = () =>{
+    this.setState({isVisibleModal: true});
   }
 
+  closeModal = () => (this.setState({isVisibleModal: false}))
+  aplicar = (filtros) =>{
+    this.props.dispatch(aplicarFiltro(filtros))
+    this.closeModal()
+  }
   render() {
-    const { repos } = this.props
+    const { repos, filtros } = this.props
+
     return (
       <View style={styles.container}>
 
@@ -51,7 +60,12 @@ class ReposScreen extends PureComponent {
             Item={UserItem}
           />
         </ScrollView>
-
+        <ModalFiltros
+          isVisible={this.state.isVisibleModal}
+          aplicar={this.aplicar}
+          close= {this.closeModal}
+          filtros = {filtros}
+        />
       </View>
     );
   }
@@ -65,9 +79,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   const { nome } = state.buscaReducer;
-  const { repos } = state.reposReducer;
+  const filtros = filtrosToStateSelectos(state);
+  const repos = repoFilterSelector(state);
   const { usuarios } = state.usuariosReducer;
   console.log(nome);
-  return { nome, repos, usuarios }
+  return { nome, repos, usuarios ,filtros}
 }
 export default connect(mapStateToProps)(ReposScreen);
