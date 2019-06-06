@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import {  View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { Image } from 'react-native-elements';
 
 export default class UserItem extends PureComponent {
@@ -10,11 +10,11 @@ export default class UserItem extends PureComponent {
   }
 
   render() {
-    const {login,avatar_url} = this.props.item;
+    const { login, avatar_url } = this.props.item;
     return (
       <View >
         <Image source={{ uri: avatar_url }}
-  style={{ width: 70, height: 70 }}/>
+          style={{ width: 70, height: 70 }} />
         <Text> {login} </Text>
       </View>
     );
